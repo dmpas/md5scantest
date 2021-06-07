@@ -15,5 +15,5 @@ matrix:
 compiler:
   - gcc
 before_install:
-  - eval "${MATRIX_EVAIL}"
+  - eval "${MATRIX_EVAL}"
 script: cmake . && cmake --build . --config Release
