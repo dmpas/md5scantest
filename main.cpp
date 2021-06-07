@@ -71,7 +71,7 @@ std::string get_csv_name()
 
 	std::stringstream name_stream;
 	name_stream << std::put_time(std::localtime(&timestamp), "%Y%m%d%H%M%S");
-	name_stream << ".csv";
+	name_stream << ".txt";
 
 	return name_stream.str();
 }

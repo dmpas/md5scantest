@@ -22,5 +22,5 @@ before_install:
 script:
   - cmake . && cmake --build . --config Release
   - ./md5list fixtures
-  - cat *.csv
+  - cat 20*.txt
   - md5sum fixtures/*
