@@ -4,4 +4,6 @@ os:
   - osx
 compiler:
   - gcc
+before_install:
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then  sudo apt-get -qq update ; fi
 script: cmake . && cmake --build . --config Release
