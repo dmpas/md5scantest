@@ -7,3 +7,6 @@ build_script:
       cmake .
 
       cmake --build . --config Release
+
+test_script:
+  - Release\md5list fixtures
