@@ -4,6 +4,7 @@
 #include <chrono>
 #include <ctime>
 #include <vector>
+#include <iomanip>
 #include "md5.h"
 
 std::string human_size(size_t size)
@@ -85,6 +86,10 @@ int main(int argc, char *argv[])
 	std::ofstream csv(get_csv_name());
 
 	for (int i = 1; i < argc; i++) {
+		if (!std::filesystem::exists(argv[i])) {
+			std::cerr << "Path does not exist: " << argv[i] << std::endl;
+			continue;
+		}
 		scan_dir(csv, argv[i]);
 	}
 

@@ -6,6 +6,7 @@
 #define MD5LIST_MD5_H
 
 #include <sstream>
+#include <cstring>
 
 class md5_hash {
 private:
@@ -295,7 +296,7 @@ private:
 		state[3] += d;
 
 		// Zeroize sensitive information.
-		memset(x, 0, sizeof x);
+		std::memset(x, 0, sizeof x);
 	}
 
 };
