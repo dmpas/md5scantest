@@ -10,3 +10,4 @@ build_script:
 
 test_script:
   - Release\md5list fixtures
+  - ps: Get-FileHash -Algorithm MD5 .\fixtures\*

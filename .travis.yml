@@ -20,3 +20,4 @@ script:
   - cmake . && cmake --build . --config Release
   - ./md5list fixtures
   - cat *.csv
+  - md5sum fixtures/*
