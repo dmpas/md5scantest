@@ -10,4 +10,5 @@ compiler:
   - gcc
 before_install:
   - if [ "$TRAVIS_OS_NAME" = "linux" ]; then sudo apt -qq update && sudo apt install g++-8 ; fi
+  - echo "$TRAVIS_OS_NAME"
 script: cmake . && cmake --build . --config Release
