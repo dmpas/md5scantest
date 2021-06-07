@@ -2,8 +2,12 @@ language: cpp
 os:
   - linux
   - osx
+addons:
+  apt:
+    sources:
+      - sourceline: 'ppa:ubuntu-toolchain-r/test'
 compiler:
   - gcc
 before_install:
-  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then  sudo apt-get -qq update ; fi
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then  sudo apt install g++-10 ; fi
 script: cmake . && cmake --build . --config Release
