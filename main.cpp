@@ -24,6 +24,10 @@ void process_file(
 		std::ostream &csv,
 		const std::filesystem::path &filepath)
 {
+	if (!std::filesystem::is_regular_file(filepath)) {
+		return;
+	}
+
 	std::cout << "Processing file " << filepath
 		<< " of size " << human_size(std::filesystem::file_size(filepath))
 		<< std::flush;
