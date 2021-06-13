@@ -17,7 +17,7 @@ build_script:
   - cmake .
   - cmake --build . --config Release
 test_script:
-  - cmd: Release/md5list fixtures
-  - sh: md5list fixtures
+  - cmd: Release\md5list.exe fixtures
+  - sh: ./md5list fixtures
   - ps: Get-FileHash -Algorithm MD5 fixtures/*
   - ps: Get-Content 20*.txt
