@@ -12,6 +12,7 @@ for:
     - sudo add-apt-repository ppa:ubuntu-toolchain-r/test && sudo apt update
   install:
     - sudo apt install g++-9
+    - export CXX=g++-9 CC=gcc-9
 
 install:
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
