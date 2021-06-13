@@ -6,10 +6,8 @@ image:
 install:
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
 build_script:
-  - cmd: >-
-      cmake .
-
-      cmake --build . --config Release
+  - cmake .
+  - cmake --build . --config Release
 
 test_script:
   - ps: Release/md5list fixtures
