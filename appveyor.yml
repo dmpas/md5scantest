@@ -1,14 +1,23 @@
 version: 1.0.{build}
-image: Visual Studio 2019
+image:
+  - Visual Studio 2019
+  - Ubuntu1604
+  - macOS
+for:
+-
+  matrix:
+      only:
+        - image: Ubuntu1604
+  init:
+    - export CXX=g++-9 CC=gcc-9
+
 install:
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
 build_script:
-  - cmd: >-
-      cmake .
-
-      cmake --build . --config Release
-
+  - cmake .
+  - cmake --build . --config Release
 test_script:
-  - Release\md5list fixtures
-  - ps: Get-FileHash -Algorithm MD5 .\fixtures\*
+  - cmd: Release\md5list.exe fixtures
+  - sh: ./md5list fixtures
+  - ps: Get-FileHash -Algorithm MD5 fixtures/*
   - ps: Get-Content 20*.txt
