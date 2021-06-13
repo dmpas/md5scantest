@@ -3,6 +3,16 @@ image:
   - Visual Studio 2019
   - Ubuntu1604
   - macOS
+for:
+-
+  matrix:
+      only:
+        - image: Ubuntu1604
+  init:
+    - sudo add-apt-repository ppa:ubuntu-toolchain-r/test && sudo apt update
+  install:
+    - sudo apt install g++-9
+
 install:
   - cmd: call "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Auxiliary\Build\vcvars64.bat"
 build_script:
