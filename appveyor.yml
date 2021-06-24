@@ -21,3 +21,6 @@ test_script:
   - sh: ./md5list fixtures
   - ps: Get-FileHash -Algorithm MD5 fixtures/*
   - ps: Get-Content 20*.txt
+artifacts:
+  - path: Release/md5list.exe
+    name: md5list
