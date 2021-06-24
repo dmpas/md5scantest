@@ -24,11 +24,6 @@ void process_file(
 		std::ostream &csv,
 		const std::filesystem::path &filepath)
 {
-	if (!std::filesystem::is_regular_file(filepath)) {
-		std::cout << "Skipped file " << filepath << std::endl;
-		return;
-	}
-
 	std::cout << "Processing file " << filepath
 		<< " of size " << human_size(std::filesystem::file_size(filepath))
 		<< std::flush;
@@ -59,6 +54,14 @@ void process_file(
 	std::cout << ". Done" << std::endl;
 }
 
+static bool check_exists(const std::filesystem::path &path)
+{
+	std::error_code ec;
+	bool result = std::filesystem::exists(path, ec);
+	if (ec) return false;
+	return result;
+}
+
 void scan_dir(
 		std::ostream &csv,
 		const std::filesystem::path &path)
@@ -73,13 +76,15 @@ void scan_dir(
 	}
 
 	for (const auto &entry : dit) {
-
-		if (entry.is_directory()) {
+		if (!check_exists(entry)) {
+			std::cout << "Skipped unavailable " << entry.path() << std::endl;
+		} else if (entry.is_directory()) {
 			scan_dir(csv, entry);
-			continue;
+		} else if (entry.is_regular_file()) {
+			process_file(csv, entry);
+		} else {
+			std::cout << "Skipped file " << entry.path() << std::endl;
 		}
-
-		process_file(csv, entry.path());
 	}
 
 }
