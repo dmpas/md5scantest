@@ -24,3 +24,5 @@ test_script:
 artifacts:
   - path: Release/md5list.exe
     name: md5list
+  - path: md5list
+    name: md5list

@@ -15,4 +15,13 @@ if (MSVC)
 			string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
 		endif()
 	endforeach()
+
+	set (CMAKE_SHARED_LINKER_FLAGS "${CMAKE_SHARED_LINKER_FLAGS} /NODEFAULTLIB:MSVCRT")
+	set (CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /NODEFAULTLIB:MSVCRT")
+	set (CMAKE_EXE_LINKER_FLAGS_DEBUG "${CMAKE_EXE_LINKER_FLAGS_DEBUG} /NODEFAULTLIB:MSVCRTD")
+
+endif()
+
+if (CMAKE_COMPILER_IS_GNUCC)
+	target_link_libraries(md5list PRIVATE -static -static-libgcc -static-libstdc++)
 endif()
