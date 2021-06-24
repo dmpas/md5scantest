@@ -25,6 +25,7 @@ void process_file(
 		const std::filesystem::path &filepath)
 {
 	if (!std::filesystem::is_regular_file(filepath)) {
+		std::cout << "Skipped file " << filepath << std::endl;
 		return;
 	}
 
@@ -55,7 +56,16 @@ void scan_dir(
 		std::ostream &csv,
 		const std::filesystem::path &path)
 {
-	for (const auto &entry : std::filesystem::directory_iterator(path)) {
+	std::filesystem::directory_iterator dit;
+
+	try {
+		dit = std::filesystem::directory_iterator(path);
+	} catch (std::filesystem::filesystem_error &) {
+		std::cout << "Skipped directory " << path << std::endl;
+		return;
+	}
+
+	for (const auto &entry : dit) {
 
 		if (entry.is_directory()) {
 			scan_dir(csv, entry);
@@ -96,6 +106,8 @@ int main(int argc, char *argv[])
 		}
 		scan_dir(csv, argv[i]);
 	}
+
+	std::cout << "All done!" << std::endl;
 
 	return 0;
 }
