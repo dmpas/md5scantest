@@ -36,9 +36,17 @@ void process_file(
 	md5_hash md5;
 	md5.start();
 
-	std::ifstream ins(filepath, std::ios_base::binary);
-	while (ins) {
-		md5.update(ins);
+	try {
+
+		std::ifstream ins(filepath, std::ios_base::binary);
+		while (ins) {
+			md5.update(ins);
+		}
+
+	}
+	catch (std::filesystem::filesystem_error &) {
+		std::cout << ". Failed" << std::endl;
+		return;
 	}
 
 	csv
@@ -48,7 +56,6 @@ void process_file(
 		<< md5.finish()
 		<< std::endl
 		;
-
 	std::cout << ". Done" << std::endl;
 }
 
